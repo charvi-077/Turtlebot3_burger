@@ -1,4 +1,8 @@
 <launch>
+  
+  <arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0"/>
 
   <!-- Here we included the launch file of empty gazebo ros from gazebo_ros package that was pre-installed-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -8,12 +12,13 @@
     <arg name="headless" value="false"/> <!-- Inert - see gazebo_ros_pkgs issue #491 -->
     <arg name="recording" value="false"/>
     <arg name="debug" value="false"/>
+ 
+    <!-- TO include the robot urdf file into the ROS parameter server-->
   </include>
-  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_burger)/urdf/turtlebot3_burger.urdf.xacro" />
 
-  <include file="$(find turtlebot3_burger)/launch/includes/description.launch.xml">
-    <arg name="model" value="$(arg model)" />
-  </include>
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_burger -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
 </launch>
+  
 
 
