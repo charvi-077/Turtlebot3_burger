@@ -1,4 +1,5 @@
 <launch>
+  <!--Till now we are not using this file ,but its just for syntax that we can use for further adding different model in the model -->
   <arg name="model"/>
   <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot3_burger)/urdf/turtlebot3_$(arg model).urdf.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
