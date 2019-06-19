@@ -1,0 +1,10 @@
+<launch>
+  <node pkg="turtlebot3_burger" type="key_publisher.py" name="keyboard_driver" output="screen">
+  </node>
+  <node pkg="turtlebot3_burger" type="key_to_twist3.py" name="keys_to_twist">
+
+    <param name="linear_scale" value="0.3" type="double"/>
+    <param name="angular_scale" value="0.5" type="double"/>
+
+  </node>
+</launch>
